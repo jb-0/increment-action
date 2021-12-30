@@ -1,0 +1,12 @@
+{
+  "name": "increment-action",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/jb-0/increment-action",
+  "author": "Jamie Barrett",
+  "license": "MIT",
+  "dependencies": {
+    "@actions/core": "^1.6.0",
+    "@actions/github": "^5.0.0"
+  }
+}
