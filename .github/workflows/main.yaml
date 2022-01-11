@@ -20,8 +20,9 @@ jobs:
 
       - name: Assert test file has been updated
         run: |
+          echo "Expect version code to equal 3"
           printf '%b\n' "$(cat app.json)"
-          file_contents="{\n\t\"versionCode\": 4,\n\t\"someOtherProperty\": 3\n}"
+          file_contents="{\n\t\"versionCode\": 3,\n\t\"someOtherProperty\": 3\n}"
           if [ "$file_contents" == "$(cat app.json)" ] ;then
             exit 0
           else
