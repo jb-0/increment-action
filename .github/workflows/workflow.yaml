@@ -8,14 +8,8 @@ jobs:
   test:
     name: Test increment action
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./src
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
+      - uses: actions/checkout@v2
 
       - name: Create test file
         run: |
