@@ -1,0 +1,29 @@
+name: Main CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+jobs:
+  test:
+    name: Test increment action
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Create test file
+        run: |
+          echo "{\n\t\"versionCode\": 2,\n\t\"someOtherProperty\": 3\n}" > app.json
+
+      - name: Run increment action
+        uses: jb-0/increment-action@main
+
+      - name: Assert test file has been updated
+        run: |
+          printf '%b\n' "$(cat app.json)"
+          file_contents="{\n\t\"versionCode\": 3,\n\t\"someOtherProperty\": 3\n}"
+          if [ "$file_contents" == "$(cat app.txt)" ] ;then
+            exit 0
+          else
+            exit 1
+          fi

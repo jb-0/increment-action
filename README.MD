@@ -6,11 +6,15 @@ This action increments a digit in the specified file.
 
 ### `file-path`
 
-**Required** File containing the digit to increment. Default `"app.json"`.
+**Optional** File containing the digit to increment. Default `"app.json"`.
 
-### `regex`
+### `pattern`
 
-**Required** Pattern to find and replace. Default `/"versionCode": (\d+),/g`.
+**Optional** RegExp pattern. Default `"versionCode": (\d+),`.
+
+### `flags`
+
+**Optional** RegExp flags. Default `g`.
 
 ## Outputs
 
@@ -23,8 +27,6 @@ Success or failure.
 ```
 - name: Checkout
   uses: actions/checkout@v2
-  with:
-    fetch-depth: 0
 
 - name: Run increment action
   uses: jb-0/increment-action
