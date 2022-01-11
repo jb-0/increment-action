@@ -22,7 +22,7 @@ jobs:
           echo "{\n\t\"versionCode\": 2,\n\t\"someOtherProperty\": 3\n}" > app.json
 
       - name: Run increment action
-        uses: jb-0/increment-action@v0.1.2
+        uses: jb-0/increment-action@main
 
       - name: Print test file
         run: |
