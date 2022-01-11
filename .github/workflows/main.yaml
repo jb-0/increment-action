@@ -22,7 +22,7 @@ jobs:
         run: |
           printf '%b\n' "$(cat app.json)"
           file_contents="{\n\t\"versionCode\": 3,\n\t\"someOtherProperty\": 3\n}"
-          if [ "$file_contents" == "$(cat app.txt)" ] ;then
+          if [ "$file_contents" == "$(cat app.json)" ] ;then
             exit 0
           else
             exit 1
