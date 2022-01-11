@@ -5,10 +5,14 @@ inputs:
     description: 'File containing the digit to increment'
     required: false
     default: 'app.json'
-  regex:
-    description: 'Pattern to find and replace'
+  pattern:
+    description: 'RegExp pattern'
     required: false
-    default: '/"versionCode": (\d+),/g'
+    default: '"versionCode": (\d+)'
+  flags:
+    description: 'RegExp flag string'
+    required: false
+    default: 'g'
 runs:
   using: 'node16'
   main: 'index.js'

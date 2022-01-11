@@ -3,13 +3,18 @@ const github = require('@actions/github');
 const fs = require('fs');
 
 const filePath = core.getInput('file-path') || 'app.json';
-const regex = core.getInput('regex') || /"versionCode": (\d+),/g;
+
+const pattern = core.getInput('pattern') || '"versionCode": (d+)';
+const flags = core.getInput('flags') || 'g';
+const regex = new RegExp(pattern, flags);
 
 const main = (filePath, regex) => {
   try {
     fs.readFile(filePath, 'utf8', (err, data) => {
       if (err) core.setFailed(err.message);
 
+      core.info(`Pattern: ${pattern}`);
+      core.info(`Flags: ${flags}`);
       core.info(`Regex: ${regex}`);
       core.info(`File data: ${data}`);
 
