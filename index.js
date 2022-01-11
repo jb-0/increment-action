@@ -8,11 +8,14 @@ const regex = core.getInput('regex') || /"versionCode": (\d+),/g;
 const main = (filePath, regex) => {
   try {
     fs.readFile(filePath, 'utf8', (err, data) => {
-      if (err) throw err;
+      if (err) core.setFailed(err.message);
+
+      core.info(`Regex: ${regex}`);
+      core.info(`File data: ${data}`);
 
       // match regex
       const arr = data.match(regex);
-      if (!arr || arr.length < 1) throw Error('No matches');
+      if (!arr || arr.length < 1) core.setFailed('No matches using regex');
 
       // get number part
       const numberRegex = /(\d+)/g;
@@ -27,13 +30,12 @@ const main = (filePath, regex) => {
       // replace and write
       const result = data.replace(regex, replacementString);
       fs.writeFile(filePath, result, 'utf8', (err) => {
-        if (err) throw err;
+        if (err) core.setFailed(err.message);
       });
     });
 
     // Get the JSON webhook payload for the event that triggered the workflow
     const payload = JSON.stringify(github.context.payload, undefined, 2);
-    console.log(`The event payload: ${payload}`);
   } catch (error) {
     core.setFailed(error.message);
   }
