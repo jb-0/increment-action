@@ -1,29 +1,14 @@
-name: Main CI
-on:
-  push:
-    branches: [main, dev]
-  pull_request:
-    branches: [main, dev]
-jobs:
-  test:
-    name: Test increment action
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./src
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-
-      - name: Create test file
-        run: |
-          echo "{\n\t\"versionCode\": 2,\n\t\"someOtherProperty\": 3\n}" > app.json
-
-      - name: Run increment action
-        uses: jb-0/increment-action@v0.1.0
-
-      - name: Print test file
-        run: |
-          printf '%b\n' "$(cat app.json)"
+name: 'Increment'
+description: 'This action increments a digit in the specified file.'
+inputs:
+  file-path:
+    description: 'File containing the digit to increment'
+    required: false
+    default: 'app.json'
+  regex:
+    description: 'Pattern to find and replace'
+    required: false
+    default: '/"versionCode": (\d+),/g'
+runs:
+  using: 'node16'
+  main: 'index.js'
