@@ -30,4 +30,16 @@ Success or failure.
 
 - name: Run increment action
   uses: jb-0/increment-action
+
+- name: Setup git config
+        run: |
+          git config user.name "GitHub Actions Bot"
+          git config user.email "<>"
+
+- name: Commit
+  run: |
+    # Stage the file, commit and push
+    git add app.json
+    git commit -m "chore: increment app versionCode"
+    git push origin main
 ```

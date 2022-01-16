@@ -38,9 +38,6 @@ const main = (filePath, regex) => {
         if (err) core.setFailed(err.message);
       });
     });
-
-    // Get the JSON webhook payload for the event that triggered the workflow
-    const payload = JSON.stringify(github.context.payload, undefined, 2);
   } catch (error) {
     core.setFailed(error.message);
   }
